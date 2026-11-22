@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruaka Electronics - Expert Appliance Repair in Ruaka | Fridge, TV, Woofer, Microwave, Computer</title>
-<meta name="description" content="Ruaka Electronics repairs Fridges, TVs, Woofers, Amplifiers, Microwaves, Computers, Washing Machines and Cookers at your home in Ruaka, Banana, Ndenderu and Kiambu Road. Same day service. Call 0797 300 175">
+<title>Ruaka Electronics - Expert Appliance Repair in Ruaka</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
 body{background:#f4f4f4;color:#111;line-height:1.5}
 a{text-decoration:none}
-header{background:#111;color:#fff;padding:26px 16px;text-align:center;position:sticky;top:0;z-index:10}
+header{background:#111;color:#fff;padding:26px 16px;text-align:center}
 header h1{color:#FFC107;font-size:29px;letter-spacing:1px}
 header p{color:#ddd;margin-top:6px;font-size:14px}
 .topbar{background:#FFC107;color:#111;text-align:center;padding:8px;font-size:13px;font-weight:bold}
@@ -34,10 +33,8 @@ header p{color:#ddd;margin-top:6px;font-size:14px}
 table{width:100%;border-collapse:collapse;font-size:14px}
 table th,table td{padding:10px;text-align:left;border-bottom:1px solid #eee}
 table th{background:#111;color:#fff}
-table td b{color:#0a7a42}
 .pill{display:inline-block;background:#fff3cd;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin:3px}
 .review{background:#f9f9f9;padding:12px;border-radius:12px;margin-bottom:10px}
-.review b{font-size:14px}
 .review p{font-size:13px;color:#555}
 .stars{color:#FFC107}
 .faq{border-bottom:1px solid #eee;padding:12px 0;cursor:pointer}
@@ -50,10 +47,8 @@ table td b{color:#0a7a42}
 .me{background:#DCF8C6;margin-left:auto}
 .bot{background:#fff;border:1px solid #eee}
 .row{display:flex;gap:8px}
-.row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:10px}
-.row button{padding:12px 16px;background:#FFC107;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.chips button{background:#eee;border:none;padding:7px 11px;border-radius:20px;font-size:12px;cursor:pointer}
+.row input{flex:1;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+.row button{padding:12px 18px;background:#FFC107;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:15px}
 .book{background:#111;color:#fff;margin:14px;padding:18px;border-radius:16px}
 .book h2{color:#FFC107}
 .book label{font-size:13px;display:block;margin-top:12px}
@@ -83,34 +78,26 @@ footer{text-align:center;padding:18px;font-size:13px;color:#777;background:#fff;
 
 <div class="section"><h2>Our Services - What We Repair</h2><p class="sub">Tap Book to fill the form automatically.</p>
 <div class="grid">
-<div class="card"><span>❄️</span><h3>Fridge Repair</h3><p>Not cooling, making noise, gas refill, leaking water, freezer not freezing, door not closing</p><b>From Ksh 1,500</b><button onclick="quickBook('Fridge')">Book Fridge</button></div>
-<div class="card"><span>📺</span><h3>TV Repair</h3><p>No picture, no sound, lines on screen, broken screen, TV turns off itself, no power</p><b>From Ksh 1,200</b><button onclick="quickBook('TV')">Book TV</button></div>
-<div class="card"><span>🔊</span><h3>Woofer / Amplifier</h3><p>Damaged speaker, weak bass, distorted sound, humming noise, one channel not working, no sound</p><b>From Ksh 800</b><button onclick="quickBook('Woofer / Amplifier')">Book Woofer</button></div>
-<div class="card"><span>♨️</span><h3>Microwave Repair</h3><p>Not turning on, no heat, loud noise, plate not rotating, sparks inside, door problem</p><b>From Ksh 1,000</b><button onclick="quickBook('Microwave')">Book Microwave</button></div>
-<div class="card"><span>💻</span><h3>Computer / Laptop</h3><p>Not switching on, black screen, slow, overheating, broken charger port, virus, no display</p><b>From Ksh 800</b><button onclick="quickBook('Computer / Laptop')">Book Computer</button></div>
-<div class="card"><span>👕</span><h3>Washing Machine</h3><p>Not spinning, not draining, shaking, leaking, not turning on, noisy</p><b>From Ksh 1,200</b><button onclick="quickBook('Washing Machine')">Book Washing Machine</button></div>
-<div class="card"><span>🍳</span><h3>Cooker / Oven</h3><p>Burner not lighting, oven not heating, gas smell, electric cooker not working</p><b>From Ksh 1,000</b><button onclick="quickBook('Cooker / Oven')">Book Cooker</button></div>
-<div class="card"><span>🛠️</span><h3>Other Appliances</h3><p>Blender, iron, fan, kettle, toaster, decoder, home theatre, extension, stabilizer</p><b>From Ksh 500</b><button onclick="quickBook('Other')">Book Other</button></div>
+<div class="card"><span>❄️</span><h3>Fridge Repair</h3><p>Not cooling, making noise, gas refill, leaking water, freezer not freezing</p><b>From Ksh 1,500</b><button type="button" onclick="quickBook('Fridge')">Book Fridge</button></div>
+<div class="card"><span>📺</span><h3>TV Repair</h3><p>No picture, no sound, lines on screen, broken screen, turns off itself</p><b>From Ksh 1,200</b><button type="button" onclick="quickBook('TV')">Book TV</button></div>
+<div class="card"><span>🔊</span><h3>Woofer / Amplifier</h3><p>Damaged speaker, weak bass, distorted sound, humming noise, no sound</p><b>From Ksh 800</b><button type="button" onclick="quickBook('Woofer / Amplifier')">Book Woofer</button></div>
+<div class="card"><span>♨️</span><h3>Microwave Repair</h3><p>Not turning on, no heat, loud noise, plate not rotating, sparks inside</p><b>From Ksh 1,000</b><button type="button" onclick="quickBook('Microwave')">Book Microwave</button></div>
+<div class="card"><span>💻</span><h3>Computer / Laptop</h3><p>Not switching on, black screen, slow, overheating, broken charger port</p><b>From Ksh 800</b><button type="button" onclick="quickBook('Computer / Laptop')">Book Computer</button></div>
+<div class="card"><span>👕</span><h3>Washing Machine</h3><p>Not spinning, not draining, shaking, leaking, not turning on, noisy</p><b>From Ksh 1,200</b><button type="button" onclick="quickBook('Washing Machine')">Book Washing Machine</button></div>
+<div class="card"><span>🍳</span><h3>Cooker / Oven</h3><p>Burner not lighting, oven not heating, gas smell, electric cooker not working</p><b>From Ksh 1,000</b><button type="button" onclick="quickBook('Cooker / Oven')">Book Cooker</button></div>
+<div class="card"><span>🛠️</span><h3>Other Appliances</h3><p>Blender, iron, fan, kettle, toaster, decoder, home theatre, stabilizer</p><b>From Ksh 500</b><button type="button" onclick="quickBook('Other')">Book Other</button></div>
 </div></div>
 
 <div class="ai">
-<h2>🤖 AI Repair Assistant - Ask Me Anything</h2>
-<p style="font-size:13px;color:#555;margin:6px 0 10px">This AI remembers your name, appliance, problem and location. It does not forget. Try the examples below.</p>
-<div class="chips">
-<button onclick="quickAsk('My name is John')">My name is John</button>
-<button onclick="quickAsk('My fridge is not cooling')">My fridge is not cooling</button>
-<button onclick="quickAsk('How much will it cost?')">How much will it cost?</button>
-<button onclick="quickAsk('Do you come to my home?')">Do you come home?</button>
-<button onclick="quickAsk('What do you repair?')">What do you repair?</button>
-<button onclick="quickAsk('My computer is not switching on')">Computer not switching on</button>
-</div>
+<h2>AI Repair Assistant - Ask Me Anything</h2>
+<p style="font-size:13px;color:#555;margin:6px 0 10px">This AI remembers your name, appliance, problem and location. Just type and press Send.</p>
 <div class="clear" onclick="clearChat()">Clear conversation</div>
 <div id="chat"></div>
-<div class="row"><input id="q" placeholder="Ask anything... e.g. My TV has no picture"><button onclick="ask()">Send</button></div>
+<div class="row"><input id="q" placeholder="Type your question here..." autocomplete="off"><button type="button" id="sendBtn">Send</button></div>
 <p style="font-size:11px;color:#888;margin-top:8px">Note: Estimates are approximate. Final price is confirmed by the technician after checking your appliance.</p>
 </div>
 
-<div class="section"><h2>💰 Full Price List - Transparent Prices</h2><p class="sub">Final price depends on fault and spare part. Technician confirms price BEFORE starting.</p>
+<div class="section"><h2>Full Price List - Transparent Prices</h2><p class="sub">Final price depends on fault and spare part. Technician confirms price BEFORE starting.</p>
 <table>
 <tr><th>Appliance</th><th>Common Problem</th><th>From</th></tr>
 <tr><td>Fridge</td><td>Gas refill, fan, thermostat</td><td><b>Ksh 1,500</b></td></tr>
@@ -122,59 +109,60 @@ footer{text-align:center;padding:18px;font-size:13px;color:#777;background:#fff;
 <tr><td>Cooker / Oven</td><td>Burner, element, igniter</td><td><b>Ksh 1,000</b></td></tr>
 <tr><td>Small Appliances</td><td>Blender, iron, fan, kettle</td><td><b>Ksh 500</b></td></tr>
 </table>
-<p style="font-size:12px;color:#555;margin-top:8px">Diagnosis is FREE if you repair with us. Transport is free within Ruaka Town.</p>
 </div>
 
-<div class="section"><h2>📍 Areas We Serve</h2><p class="sub">We do home visits in:</p>
-<div><span class="pill">Ruaka Town</span><span class="pill">Joyland</span><span class="pill">Banana</span><span class="pill">Ndenderu</span><span class="pill">Two Rivers</span><span class="pill">Kiambu Road</span><span class="pill">Gachie</span><span class="pill">Kahawa West</span><span class="pill">Runda</span><span class="pill">Gigiri</span></div>
-<p style="font-size:13px;color:#555;margin-top:10px">If your area is not listed, WhatsApp us. We may still come.</p></div>
+<div class="section"><h2>Areas We Serve</h2><p class="sub">We do home visits in:</p>
+<div><span class="pill">Ruaka Town</span><span class="pill">Joyland</span><span class="pill">Banana</span><span class="pill">Ndenderu</span><span class="pill">Two Rivers</span><span class="pill">Kiambu Road</span><span class="pill">Gachie</span><span class="pill">Kahawa West</span><span class="pill">Runda</span><span class="pill">Gigiri</span></div></div>
 
-<div class="section"><h2>⭐ What Our Customers Say</h2>
+<div class="section"><h2>What Our Customers Say</h2>
 <div class="review"><div class="stars">★★★★★</div><b>Mary - Ruaka</b><p>"My fridge stopped cooling. Technician came same day, refilled gas, now it is working perfectly. Very honest price."</p></div>
 <div class="review"><div class="stars">★★★★★</div><b>David - Banana</b><p>"My TV had sound but no picture. He fixed it at my home in 1 hour. I did not need to carry it anywhere."</p></div>
 <div class="review"><div class="stars">★★★★★</div><b>Kevin - Ndenderu</b><p>"My woofer was distorting. He replaced the speaker and now bass is very clean. Highly recommend."</p></div>
 </div>
 
-<div class="section"><h2>🖼️ Recent Work</h2>
+<div class="section"><h2>Recent Work</h2>
 <div class="gallery"><div>❄️<p>Fridge Gas Refill</p></div><div>📺<p>TV Backlight Repair</p></div><div>🔊<p>Woofer Speaker Replacement</p></div></div>
 <p style="font-size:12px;color:#888;margin-top:8px;text-align:center">Send us a photo of your appliance on WhatsApp for a faster estimate.</p></div>
 
-<div class="section"><h2>❓ Frequently Asked Questions</h2>
-<div class="faq" onclick="this.classList.toggle('open')"><b>Do you come to my home?</b><p>Yes. We do home service for fridges, TVs, washing machines and other heavy appliances. You do not need to bring them to us.</p></div>
-<div class="faq" onclick="this.classList.toggle('open')"><b>How much will my repair cost?</b><p>It depends on the fault and part needed. See our price list above. The technician will check your appliance and confirm the final price before starting, so you can decide.</p></div>
+<div class="section"><h2>Frequently Asked Questions</h2>
+<div class="faq" onclick="this.classList.toggle('open')"><b>Do you come to my home?</b><p>Yes. We do home service for fridges, TVs, washing machines and other heavy appliances.</p></div>
+<div class="faq" onclick="this.classList.toggle('open')"><b>How much will my repair cost?</b><p>It depends on the fault and part needed. See price list above. Technician confirms final price before starting.</p></div>
 <div class="faq" onclick="this.classList.toggle('open')"><b>How long does repair take?</b><p>Most repairs take 1 to 2 hours if the part is available. If we need to order a part, it can take 1 to 2 days.</p></div>
 <div class="faq" onclick="this.classList.toggle('open')"><b>How do I pay?</b><p>You can pay with M-Pesa or cash after the repair is done and tested.</p></div>
-<div class="faq" onclick="this.classList.toggle('open')"><b>What if my appliance cannot be repaired?</b><p>The technician will tell you honestly. You will not pay for repair if it cannot be fixed. You only pay for diagnosis if you choose not to repair, which we will explain before.</p></div>
-<div class="faq" onclick="this.classList.toggle('open')"><b>Do you sell spare parts?</b><p>Yes, we can help you get original spare parts for your appliance. Ask the technician.</p></div>
+<div class="faq" onclick="this.classList.toggle('open')"><b>What if my appliance cannot be repaired?</b><p>Technician will tell you honestly. You will not pay for repair if it cannot be fixed.</p></div>
 </div>
 
-<div class="section"><h2>🛡️ Safety Tips - Please Read</h2>
-<p style="font-size:14px;color:#444">• If you smell gas from cooker, turn off gas, open windows, do not switch on lights.<br>• Do not open a microwave yourself. It stores high voltage even when unplugged.<br>• Unplug appliance if cable is damaged or it is sparking.<br>• Keep fridge door closed if it is not cooling, so food stays cold longer.<br>• Do not pour water on electrical appliances.</p></div>
+<div class="section"><h2>Safety Tips - Please Read</h2>
+<p style="font-size:14px;color:#444">• If you smell gas from cooker, turn off gas, open windows, do not switch on lights.<br>• Do not open a microwave yourself. It stores high voltage even when unplugged.<br>• Unplug appliance if cable is damaged or it is sparking.<br>• Keep fridge door closed if it is not cooling, so food stays cold longer.</p></div>
 
-<div class="book" id="book"><h2>📋 Book a Repair</h2><p style="font-size:13px;color:#ccc">Fill this form and it will open WhatsApp with your details already written.</p>
+<div class="book" id="book"><h2>Book a Repair</h2><p style="font-size:13px;color:#ccc">Fill this form and it will open WhatsApp with your details already written.</p>
 <label>Select Appliance</label><select id="device"><option>Fridge</option><option>TV</option><option>Woofer / Amplifier</option><option>Microwave</option><option>Computer / Laptop</option><option>Washing Machine</option><option>Cooker / Oven</option><option>Other</option></select>
-<label>What is the problem?</label><textarea id="problem" rows="3" placeholder="Describe the problem... e.g. My fridge is not cooling since yesterday"></textarea>
+<label>What is the problem?</label><textarea id="problem" rows="3" placeholder="Describe the problem..."></textarea>
 <label>Your Name</label><input id="name" placeholder="Your name">
 <label>Your Phone (optional)</label><input id="phone" placeholder="e.g. 07XX XXX XXX">
 <label>Your Location / Estate</label><input id="loc" placeholder="e.g. Ruaka, Joyland">
 <label>When do you want repair?</label><select id="when"><option>Today - As soon as possible</option><option>Tomorrow</option><option>This Weekend</option><option>Any day</option></select>
-<button onclick="sendWhatsApp()">Send to WhatsApp →</button>
-<p style="font-size:12px;color:#aaa;margin-top:10px;text-align:center">📍 Ruaka Town, Next to Quickmart | Open 8am - 8pm Daily | Call 0797 300 175</p></div>
+<button type="button" onclick="sendWhatsApp()">Send to WhatsApp →</button>
+<p style="font-size:12px;color:#aaa;margin-top:10px;text-align:center">Ruaka Town, Next to Quickmart | Open 8am - 8pm Daily | Call 0797 300 175</p></div>
 
 <footer><b>RUAKA ELECTRONICS</b><br>Ruaka Town, Next to Quickmart | Open Daily 8am - 8pm<br>Call / WhatsApp: 0797 300 175<br>© 2026 Ruaka Electronics. All rights reserved.</footer>
 
 <script>
-const chat=document.getElementById('chat');
-let memory = JSON.parse(localStorage.getItem('ruaka_memory_v2')||'{"name":"","appliance":"","problem":"","location":"","phone":"","history":[]}');
-function saveMemory(){ localStorage.setItem('ruaka_memory_v2', JSON.stringify(memory)); }
-function addMsg(t,who,save=true){ let d=document.createElement('div');d.className='msg '+who;d.innerHTML=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight; if(save){ memory.history.push({t:t,who:who}); if(memory.history.length>40) memory.history.shift(); saveMemory(); } }
-function clearChat(){ localStorage.removeItem('ruaka_memory_v2'); memory={name:"",appliance:"",problem:"",location:"",phone:"",history:[]}; chat.innerHTML=""; addMsg("Conversation cleared. Hello again! What is your name and what appliance is broken?",'bot'); }
-if(memory.history.length>0){ memory.history.forEach(h=>addMsg(h.t,h.who,false)); }
-else { addMsg("Hello! Welcome to Ruaka Electronics. I remember our conversation, so you do not need to repeat yourself. What is your name and what appliance is broken? Try: My fridge is not cooling.",'bot'); }
-function quickBook(dev){ document.getElementById('device').value=dev; document.getElementById('book').scrollIntoView({behavior:'smooth'}); if(memory.appliance) document.getElementById('problem').value=memory.problem||""; }
-function quickAsk(text){ document.getElementById('q').value=text; ask(); }
-function hasWord(text, words){ let low=" "+text.toLowerCase().replace(/[^a-z0-9 ]/g," ")+" "; return words.some(w=>low.includes(" "+w+" ")); }
-function hasPhrase(text, phrase){ return text.toLowerCase().includes(phrase); }
+var chatBox = document.getElementById('chat');
+var memory = {name:"",appliance:"",problem:"",location:"",history:[]};
+try{ var saved = localStorage.getItem('ruaka_memory_v3'); if(saved){ memory = JSON.parse(saved); } }catch(e){ memory = {name:"",appliance:"",problem:"",location:"",history:[]}; }
+function saveMemory(){ try{ localStorage.setItem('ruaka_memory_v3', JSON.stringify(memory)); }catch(e){} }
+function addMsg(text, who, save){
+  if(save === undefined) save = true;
+  var d = document.createElement('div'); d.className = 'msg ' + who; d.innerHTML = text; chatBox.appendChild(d); chatBox.scrollTop = chatBox.scrollHeight;
+  if(save){ memory.history.push({t:text,who:who}); if(memory.history.length > 40) memory.history.shift(); saveMemory(); }
+}
+function clearChat(){ try{ localStorage.removeItem('ruaka_memory_v3'); }catch(e){} memory = {name:"",appliance:"",problem:"",location:"",history:[]}; chatBox.innerHTML=""; addMsg("Conversation cleared. Hello again! What is your name and what appliance is broken?",'bot'); }
+if(memory.history && memory.history.length > 0){ for(var i=0;i<memory.history.length;i++){ addMsg(memory.history[i].t, memory.history[i].who, false); } }
+else { addMsg("Hello! Welcome to Ruaka Electronics. I remember our conversation, so you do not need to repeat yourself. What is your name and what appliance is broken?",'bot'); }
+function quickBook(dev){ var sel = document.getElementById('device'); if(sel) sel.value = dev; var b = document.getElementById('book'); if(b) b.scrollIntoView({behavior:'smooth'}); }
+function hasWord(text, words){ var low = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g," ") + " "; for(var i=0;i<words.length;i++){ if(low.indexOf(" "+words[i]+" ") !== -1) return true; } return false; }
+function hasPhrase(text, phrase){ return text.toLowerCase().indexOf(phrase) !== -1; }
 function detectAppliance(l){
   if(hasWord(l,['computer','laptop','pc','desktop'])) return 'Computer / Laptop';
   if(hasWord(l,['amplifier','amp','woofer','subwoofer','speaker','bass'])) return 'Woofer / Amplifier';
@@ -183,22 +171,33 @@ function detectAppliance(l){
   if(hasWord(l,['fridge','freezer'])) return 'Fridge';
   if(hasWord(l,['washing','washer'])) return 'Washing Machine';
   if(hasWord(l,['cooker','stove','hotplate','oven'])) return 'Cooker / Oven';
-  if(hasWord(l,['blender','iron','fan','kettle','toaster','decoder','theatre'])) return 'Other';
+  if(hasWord(l,['blender','iron','fan','kettle','toaster','decoder'])) return 'Other';
   return "";
 }
 function getInfo(appliance){
-  if(appliance==='Computer / Laptop') return "<b>Computer / Laptop:</b><br><b>Likely cause:</b> Not switching on is often faulty charger, battery, RAM, or power button. Black screen is often RAM or display.<br><b>What to do:</b> Remove charger, hold power button for 15 seconds, try again with charger. Back up your files if it turns on.<br><b>Estimate: Ksh 800 - 3,500.</b>";
-  if(appliance==='Woofer / Amplifier') return "<b>Amplifier / Woofer:</b><br><b>Likely cause:</b> Humming or distorting is usually damaged speaker coil, faulty capacitor, or amplifier board.<br><b>What to do:</b> Turn volume down and switch it off. Do not keep playing it loud, it damages speaker more.<br><b>Estimate: Ksh 800 - 3,000.</b>";
-  if(appliance==='TV') return "<b>TV:</b><br><b>Likely cause:</b> Sound but no picture often means backlight failure. No power often means power board failure. Lines often mean panel problem.<br><b>What to do:</b> Unplug for 1 minute, try again. If screen is cracked, do not press it.<br><b>Estimate: Ksh 1,200 - 4,000.</b> Screen replacement costs more.";
-  if(appliance==='Microwave') return "<b>Microwave:</b><br><b>Likely cause:</b> Not turning on is often fuse or door switch. Running but no heat is often magnetron.<br><b>Safety:</b> Do not open it yourself. It stores high voltage even when unplugged.<br><b>Estimate: Ksh 1,000 - 3,000.</b>";
-  if(appliance==='Fridge') return "<b>Fridge:</b><br><b>Likely cause:</b> Not cooling is often low gas, blocked fan, or faulty thermostat. Noise is often fan or compressor. Leaking is often blocked drain.<br><b>What to do:</b> Keep door closed so food stays cold. Do not try to add gas yourself.<br><b>Estimate: Ksh 1,500 - 3,500.</b>";
-  if(appliance==='Washing Machine') return "<b>Washing Machine:</b><br><b>Likely cause:</b> Not spinning is often belt, pump or lid switch. Not draining is often blocked pump filter. Shaking is often uneven load.<br><b>What to do:</b> Switch off, unplug, check if clothes are balanced.<br><b>Estimate: Ksh 1,200 - 3,500.</b>";
-  if(appliance==='Cooker / Oven') return "<b>Cooker / Oven:</b><br><b>Likely cause:</b> Burner not lighting is often blocked nozzle or faulty igniter. Electric cooker not heating is often faulty element.<br><b>Safety:</b> If you smell gas, turn off gas, open windows, do not switch on lights.<br><b>Estimate: Ksh 1,000 - 3,000.</b>";
-  if(appliance==='Other') return "<b>Small Appliance:</b><br>We repair blenders, irons, fans, kettles, toasters and more. Most faults are worn brushes, faulty switches, or broken cables.<br><b>What to do:</b> Unplug it if cable is damaged.<br><b>Estimate: Ksh 500 - 1,500.</b>";
+  if(appliance==='Computer / Laptop') return "<b>Computer / Laptop:</b><br><b>Likely cause:</b> Not switching on is often faulty charger, battery, RAM, or power button.<br><b>What to do:</b> Remove charger, hold power button for 15 seconds, try again with charger.<br><b>Estimate: Ksh 800 - 3,500.</b>";
+  if(appliance==='Woofer / Amplifier') return "<b>Amplifier / Woofer:</b><br><b>Likely cause:</b> Humming or distorting is usually damaged speaker coil, faulty capacitor, or amplifier board.<br><b>What to do:</b> Turn volume down and switch it off.<br><b>Estimate: Ksh 800 - 3,000.</b>";
+  if(appliance==='TV') return "<b>TV:</b><br><b>Likely cause:</b> Sound but no picture often means backlight failure. No power often means power board failure.<br><b>What to do:</b> Unplug for 1 minute, try again.<br><b>Estimate: Ksh 1,200 - 4,000.</b>";
+  if(appliance==='Microwave') return "<b>Microwave:</b><br><b>Likely cause:</b> Not turning on is often fuse or door switch. No heat is often magnetron.<br><b>Safety:</b> Do not open it yourself. It stores high voltage even when unplugged.<br><b>Estimate: Ksh 1,000 - 3,000.</b>";
+  if(appliance==='Fridge') return "<b>Fridge:</b><br><b>Likely cause:</b> Not cooling is often low gas, blocked fan, or faulty thermostat. Noise is often fan or compressor.<br><b>What to do:</b> Keep door closed so food stays cold.<br><b>Estimate: Ksh 1,500 - 3,500.</b>";
+  if(appliance==='Washing Machine') return "<b>Washing Machine:</b><br><b>Likely cause:</b> Not spinning is often belt, pump or lid switch. Not draining is often blocked pump filter.<br><b>Estimate: Ksh 1,200 - 3,500.</b>";
+  if(appliance==='Cooker / Oven') return "<b>Cooker / Oven:</b><br><b>Likely cause:</b> Burner not lighting is often blocked nozzle or faulty igniter.<br><b>Safety:</b> If you smell gas, turn off gas, open windows, do not switch on lights.<br><b>Estimate: Ksh 1,000 - 3,000.</b>";
+  if(appliance==='Other') return "<b>Small Appliance:</b><br>We repair blenders, irons, fans, kettles and more.<br><b>What to do:</b> Unplug it if cable is damaged.<br><b>Estimate: Ksh 500 - 1,500.</b>";
   return "";
 }
 function ask(){
-let q=document.getElementById('q').value.trim();if(!q) return;
-addMsg(q,'me');document.getElementById('q').value='';
-let l=q.toLowerCase();let ans="";
-let nameMatch = q
+  var input = document.getElementById('q');
+  var q = input.value.trim();
+  if(!q) return;
+  addMsg(q,'me');
+  input.value = '';
+  input.focus();
+  var l = q.toLowerCase();
+  var ans = "";
+  var nameMatch = q.match(/(?:my name is|i am|i'm|call me)\s+([a-zA-Z]+)/i);
+  if(nameMatch && hasPhrase(l,'name')){ memory.name = nameMatch[1].charAt(0).toUpperCase()+nameMatch[1].slice(1).toLowerCase(); saveMemory(); addMsg("Nice to meet you, "+memory.name+"! I will remember you. Now, what appliance is broken?",'bot'); return; }
+  if(hasPhrase(l,'i live in')||hasPhrase(l,'i stay in')||hasPhrase(l,'my location is')){
+    var loc = q.replace(/.*(live in|stay in|my location is)/i,'').trim();
+    if(loc){ memory.location = loc; saveMemory(); addMsg("Got it"+(memory.name? ", "+memory.name:"")+", I have saved your location as "+loc+". We do home visits there. What is broken?",'bot'); return; }
+  }
+  if(hasPhrase(l,'what is my name')){ addMsg(memory.name ? "Your name is "+memory.name+". I remember you!" : "
