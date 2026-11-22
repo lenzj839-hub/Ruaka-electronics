@@ -26,8 +26,8 @@ header p{color:#ddd;margin-top:6px;font-size:14px}
 .ai{background:#fff;margin:14px;padding:16px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
 .ai h2{font-size:18px}
 .ai p{font-size:13px;color:#555;margin:6px 0 10px}
-#chat{height:200px;overflow-y:auto;background:#f9f9f9;border:1px solid #eee;border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px}
-.msg{margin-bottom:8px;padding:8px 10px;border-radius:10px;max-width:92%}
+#chat{height:260px;overflow-y:auto;background:#f9f9f9;border:1px solid #eee;border-radius:10px;padding:10px;font-size:14px;margin-bottom:10px}
+.msg{margin-bottom:8px;padding:9px 10px;border-radius:10px;max-width:92%;line-height:1.4}
 .me{background:#DCF8C6;margin-left:auto}
 .bot{background:#fff;border:1px solid #eee}
 .row{display:flex;gap:8px}
@@ -46,7 +46,7 @@ footer{text-align:center;padding:16px;font-size:13px;color:#777}
 <body>
 <header>
 <h1>RUAKA ELECTRONICS</h1>
-<p>Expert Repair Services | Fridge • TV • Woofer • Microwave</p>
+<p>Expert Repair Services | Fridge • TV • Woofer • Microwave • Amplifier & More</p>
 <div class="badge">⚡ Same Day Repair in Ruaka</div>
 </header>
 
@@ -58,29 +58,29 @@ footer{text-align:center;padding:16px;font-size:13px;color:#777}
 </div>
 
 <div class="trust">
-<div>✅ 6 Months Warranty</div>
 <div>🏠 Home Service</div>
+<div>🛠️ Experienced Technician</div>
 <div>💰 Free Diagnosis</div>
 </div>
 
 <div class="grid" style="margin-top:12px">
 <div class="card"><span>❄️</span><h3>Fridge Repair</h3><p>Not cooling, making noise, gas refill, leaking water</p><b>From Ksh 1,500</b><button onclick="quickBook('Fridge')">Book Fridge</button></div>
 <div class="card"><span>📺</span><h3>TV Repair</h3><p>No picture, no sound, broken screen, turns off itself</p><b>From Ksh 1,200</b><button onclick="quickBook('TV')">Book TV</button></div>
-<div class="card"><span>🔊</span><h3>Woofer / Music System</h3><p>Damaged speaker, weak bass, distorted sound</p><b>From Ksh 800</b><button onclick="quickBook('Woofer')">Book Woofer</button></div>
+<div class="card"><span>🔊</span><h3>Woofer / Amplifier</h3><p>Damaged speaker, weak bass, distorted sound, humming noise</p><b>From Ksh 800</b><button onclick="quickBook('Woofer / Amplifier')">Book Woofer</button></div>
 <div class="card"><span>♨️</span><h3>Microwave Repair</h3><p>Not turning on, no heat, loud noise, plate not rotating</p><b>From Ksh 1,000</b><button onclick="quickBook('Microwave')">Book Microwave</button></div>
 </div>
 
 <div class="ai">
 <h2>🤖 AI Repair Assistant - Ask Me Anything</h2>
-<p>Type your problem, the AI will diagnose it and give you an estimate.</p>
-<div id="chat"><div class="msg bot">Hello! Welcome to Ruaka Electronics. What is broken? For example: "My fridge is not cooling" or "My TV has no sound"</div></div>
-<div class="row"><input id="q" placeholder="e.g. My fridge is making noise..."><button onclick="ask()">Send</button></div>
+<p>Type your problem. The AI will explain the likely cause, give an estimate, and safety advice.</p>
+<div id="chat"><div class="msg bot">Hello! Welcome to Ruaka Electronics. What appliance is broken? You can ask about Fridge, TV, Woofer, Amplifier, Microwave, Washing Machine, Cooker, and more. Example: "My amplifier is making noise"</div></div>
+<div class="row"><input id="q" placeholder="Ask anything... e.g. My fridge is leaking"><button onclick="ask()">Send</button></div>
 </div>
 
 <div class="book" id="book">
 <h2>📋 Book a Repair</h2>
 <label>Select Appliance</label>
-<select id="device"><option>Fridge</option><option>TV</option><option>Woofer / Music System</option><option>Microwave</option><option>Other</option></select>
+<select id="device"><option>Fridge</option><option>TV</option><option>Woofer / Amplifier</option><option>Microwave</option><option>Washing Machine</option><option>Cooker / Oven</option><option>Other</option></select>
 <label>What is the problem?</label>
 <textarea id="problem" rows="3" placeholder="Describe the problem..."></textarea>
 <label>Your Name</label>
@@ -101,14 +101,60 @@ function ask(){
 let q=document.getElementById('q').value.trim();if(!q) return;
 addMsg(q,'me');document.getElementById('q').value='';
 let l=q.toLowerCase();let ans="";
-if(l.includes('fridge')||l.includes('cool')||l.includes('noise')||l.includes('gas')||l.includes('leak')){ans="❄️ <b>Fridge:</b> If it is not cooling, it is usually low gas or a faulty fan. If it is making noise, the compressor or fan may be damaged. <b>Estimate: Ksh 1,500 - 3,500</b> depending on the fault. We come to your home. Do you want to book?";}
-else if(l.includes('tv')||l.includes('picture')||l.includes('screen')||l.includes('sound')){ans="📺 <b>TV:</b> If there is sound but no picture, the backlight is faulty. If there is no sound, the speaker or board is faulty. <b>Estimate: Ksh 1,200 - 4,000.</b> We can repair it at your home.";}
-else if(l.includes('woofer')||l.includes('speaker')||l.includes('bass')||l.includes('music')||l.includes('sound')){ans="🔊 <b>Woofer:</b> If it is cracking or distorting, the speaker coil is damaged. We replace the speaker with a new one. <b>Estimate: Ksh 800 - 2,500.</b>";}
-else if(l.includes('microwave')||l.includes('heat')||l.includes('turn on')||l.includes('plate')){ans="♨️ <b>Microwave:</b> If it is not turning on, it could be the fuse or door switch. If it has no heat, the magnetron may be faulty. <b>Estimate: Ksh 1,000 - 3,000.</b>";}
-else if(l.includes('price')||l.includes('cost')||l.includes('how much')||l.includes('charge')){ans="Our prices: Fridge from 1,500, TV from 1,200, Woofer from 800, Microwave from 1,000. Final price after the technician checks it. Diagnosis is FREE if you repair with us!";}
-else if(l.includes('where')||l.includes('location')||l.includes('address')){ans="We are in Ruaka Town, Next to Quickmart. We also do home visits in Ruaka, Banana, Ndenderu, and Kiambu Road. Call 0797 300 175";}
-else if(l.includes('hello')||l.includes('hi')||l.includes('hey')){ans="Hello! How can I help you today? Tell me what appliance is broken.";}
-else {ans="Got it. We can fix that. Please fill the Book Repair form below or WhatsApp the technician directly so he can help you quickly. 👍";}
+
+function has(...words){return words.some(w=>l.includes(w));}
+
+if(has('hello','hi','hey','good morning','good afternoon')){
+ans="Hello! How can I help you today? Tell me which appliance is broken and what it is doing, for example: 'My TV has no picture'.";
+}
+else if(has('amplifier','amp ','woofer','subwoofer','speaker','bass','humming','distort')){
+ans="🔊 <b>Amplifier / Woofer:</b><br><br><b>Likely cause:</b> If it is humming, cracking or distorting, it is usually a damaged speaker coil, a faulty capacitor, or a problem in the amplifier board.<br><b>What to do:</b> Turn the volume down and switch it off. Do not keep playing it loud, it can damage the speaker more.<br><b>Estimate: Ksh 800 - 3,000.</b> Final price depends on the part needed. The technician will confirm after checking it.";
+}
+else if(has('tv','television','picture','screen')){
+ans="📺 <b>TV:</b><br><br><b>Likely cause:</b> Sound but no picture often means backlight failure. No picture and no power often means power board failure. Lines or cracks on screen mean panel damage.<br><b>What to do:</b> Unplug it for 1 minute, then try again. If the screen is physically cracked, do not press on it.<br><b>Estimate: Ksh 1,200 - 4,000.</b> Screen replacement costs more and the technician will confirm after checking the model.";
+}
+else if(has('microwave','oven') && has('microwave')){
+ans="♨️ <b>Microwave:</b><br><br><b>Likely cause:</b> Not turning on is often a fuse or door switch. Running but no heat is often the magnetron or high voltage diode.<br><b>Safety:</b> Please do not open the microwave yourself. It stores high voltage even when unplugged. Unplug it and wait for the technician.<br><b>Estimate: Ksh 1,000 - 3,000.</b> Final price after inspection.";
+}
+else if(has('fridge','freezer','cool','cold','gas','leak')){
+ans="❄️ <b>Fridge:</b><br><br><b>Likely cause:</b> Not cooling is often low gas, a blocked fan, or a faulty thermostat. Making noise is often the fan or compressor. Leaking water is often a blocked drain.<br><b>What to do:</b> Keep the door closed as much as possible so food stays cold. Do not try to add gas yourself.<br><b>Estimate: Ksh 1,500 - 3,500.</b> The technician will confirm the exact fault after checking it at your home.";
+}
+else if(has('washing','washer','machine')){
+ans="👕 <b>Washing Machine:</b><br><br><b>Likely cause:</b> Not spinning is often a belt, pump or lid switch problem. Not draining is often a blocked pump filter. Shaking a lot is often uneven load or worn shock absorbers.<br><b>What to do:</b> Switch it off, unplug it, and check if clothes are balanced. Do not force the door open.<br><b>Estimate: Ksh 1,200 - 3,500.</b> Final price after inspection.";
+}
+else if(has('cooker','stove','gas cooker','hotplate')){
+ans="🍳 <b>Cooker / Stove:</b><br><br><b>Likely cause:</b> One burner not lighting is often a blocked nozzle or faulty igniter. Electric cooker not heating is often a faulty element or switch.<br><b>Safety:</b> If you smell gas, turn off the gas, open windows, and do not switch on lights. Leave the house and call for help.<br><b>Estimate: Ksh 1,000 - 3,000.</b> Final price after inspection.";
+}
+else if(has('blender','iron','fan','kettle','toaster')){
+ans="🛠️ <b>Small Appliance:</b><br><br>We also repair small appliances like blenders, irons, fans and kettles. The most common faults are worn brushes, faulty switches, or broken cables.<br><b>What to do:</b> Unplug it and do not use it if the cable is damaged.<br><b>Estimate: Ksh 500 - 1,500.</b> Bring it to us or WhatsApp a photo of it for a better estimate.";
+}
+else if(has('price','cost','how much','charge','fee')){
+ans="Our starting prices: Fridge from Ksh 1,500, TV from Ksh 1,200, Woofer / Amplifier from Ksh 800, Microwave from Ksh 1,000, Washing Machine from Ksh 1,200. These are estimates only. The final price depends on the fault and the spare part needed. The technician will confirm the price before starting the repair, so you can decide.";
+}
+else if(has('how long','time','duration','fast')){
+ans="Most repairs take 1 to 2 hours at your home if the spare part is available. If we need to order a part, it can take 1 to 2 days. The technician will tell you the time after checking your appliance.";
+}
+else if(has('where','location','address','place')){
+ans="We are in Ruaka Town, Next to Quickmart. We also do home visits in Ruaka, Banana, Ndenderu, Two Rivers area, and Kiambu Road. Call or WhatsApp 0797 300 175 to book a visit.";
+}
+else if(has('open','close','working hours','time open')){
+ans="We are open daily from 8am to 8pm. For urgent repairs, WhatsApp us on 0797 300 175 and we will try to arrange a same-day visit if a technician is available.";
+}
+else if(has('home','come','visit','house')){
+ans="Yes, we do home service. You do not need to bring heavy appliances like fridges to us. Fill the Book a Repair form below with your location, and the technician will come to you.";
+}
+else if(has('payment','pay','mpesa','cash')){
+ans="You can pay with M-Pesa or cash after the repair is done and tested. You will only pay the price the technician confirms with you before the repair starts.";
+}
+else if(has('noise','sound','loud','vibration')){
+ans="Noise can come from different parts depending on the appliance. To help you accurately, can you tell me which appliance is making the noise? For example: 'My fridge is making noise' or 'My amplifier is making noise'.";
+}
+else if(has('not working','broken','dead','not turning','won\'t','not on','off')){
+ans="I understand. To give you the right advice, please tell me which appliance it is and what exactly happens when you try to use it. For example: 'My TV turns on but has no picture' or 'My microwave is not heating'. If it is urgent, WhatsApp the technician directly on 0797 300 175.";
+}
+else {
+ans="Thank you for asking. I want to give you accurate information, so I do not want to guess. Your question needs a technician to check the appliance in person. Please describe the appliance and the problem in the Book a Repair form below, or 【entity-WhatsApp¦canonical_name=WhatsApp】 the technician on 0797 300 175 with a photo or video of the problem. He will advise you correctly.";
+}
 addMsg(ans,'bot');
 }
 document.getElementById('q').addEventListener('keypress',function(e){if(e.key==='Enter') ask();});
@@ -119,4 +165,4 @@ window.open('https://wa.me/254797300175?text='+text,'_blank');
 }
 </script>
 </body>
-</html>
+  </html>
