@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ruaka Electronics</title>
+<style>
+body { font-family: Arial; margin: 0; background: #f2f2f2; }
+header { background: #111; color: white; padding: 20px; text-align: center; }
+header h1 { margin: 0; color: #ffcc00; }
+nav { background: #ffcc00; padding: 10px; text-align: center; font-weight: bold; }
+.products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
+.card { background: white; width: 250px; margin: 10px; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 0 10px #ccc; }
+.card button { background: #111; color: #ffcc00; padding: 10px; border: none; border-radius: 5px; width: 100%; }
+.chat { background: white; margin: 20px; padding: 15px; border-radius: 10px; }
+footer { background: #111; color: white; text-align: center; padding: 15px; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>RUAKA ELECTRONICS</h1>
+<p>Best Prices in Ruaka | Original Products | Delivery Available</p>
+</header>
+
+<nav>Phones | TVs | Fridges | Laptops | Accessories</nav>
+
+<div class="products">
+  <div class="card">
+    <h3>【entity-Samsung¦canonical_name=Samsung】 Phone</h3>
+    <p>Original | 128GB | Dual SIM</p>
+    <h2>Ksh 18,500</h2>
+    <button onclick="order('【entity-Samsung¦canonical_name=Samsung】 Phone')">Order Now</button>
+  </div>
+  <div class="card">
+    <h3>32" Smart TV</h3>
+    <p>【entity-Netflix¦canonical_name=Netflix】 | YouTube | WiFi</p>
+    <h2>Ksh 22,000</h2>
+    <button onclick="order('32 Smart TV')">Order Now</button>
+  </div>
+  <div class="card">
+    <h3>Double Door Fridge</h3>
+    <p>Energy Saving | Warranty 1 Year</p>
+    <h2>Ksh 45,000</h2>
+    <button onclick="order('Fridge')">Order Now</button>
+  </div>
+</div>
+
+<div class="chat">
+  <h3>🤖 AI Assistant - Uliza Swali</h3>
+  <input id="chatInput" placeholder="e.g. Bei ya TV ni ngapi?" style="width:70%; padding:10px;">
+  <button onclick="reply()" style="padding:10px; background:#ffcc00;">Tuma</button>
+  <p id="chatReply" style="font-weight:bold;"></p>
+</div>
+
+<footer>
+  <p>📍 Ruaka Town, Next to Quickmart | 📞 0712 345 678 | Open 8am - 8pm</p>
+  <p>© 2026 Ruaka Electronics</p>
+</footer>
+
+<script>
+function order(item) {
+  alert("Ume-order " + item + "! Tutakupigia simu kukamilisha.");
+}
+function reply() {
+  let q = document.getElementById("chatInput").value.toLowerCase();
+  let a = "";
+  if (q.includes("tv") || q.includes("television")) a = "32 inch Smart TV ni Ksh 22,000. Inakuja na warranty 1 year.";
+  else if (q.includes("amplifier") || q.includes("amplifier")) a = "Tuna 【entity-Sony¦canonical_name=Sony】 6,000 and pioneer kutoka 12,000. Unataka gani?";
+  else if (q.includes("microwave") || q.includes("microwave")) a = "Double Door Fridge ni Ksh 45,000, free delivery Ruaka.";
+  else if (q.includes("location") || q.includes("location")) a = "We are located at Ruaka along old ruaka road, near marura apartments.";
+  else if (q.includes("price") || q.includes("price")) a = "Bei inaanza 1,500 kwa accessories hadi 45,000. Uliza bidhaa gani?";
+  else a = "Thanks! Call 0797300175 or WhatsApp for quick update.";
+  document.getElementById("chatReply").innerText = a;
+}
+</script>
+
+</body>
+  </html>
