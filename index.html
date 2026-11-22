@@ -178,11 +178,10 @@ footer{text-align:center;padding:18px;font-size:13px;color:#777;background:#fff;
 <script>
 var chatBox = document.getElementById('chat');
 var memName = ""; var memAppliance = ""; var memProblem = ""; var memLocation = "";
-var lastBotAns = ""; var lastUserQ = "";
 try{ var s = localStorage.getItem('ruaka_mem_simple'); if(s){ var o = JSON.parse(s); memName=o.name||""; memAppliance=o.appliance||""; memProblem=o.problem||""; memLocation=o.location||""; } }catch(e){}
 function saveMem(){ try{ localStorage.setItem('ruaka_mem_simple', JSON.stringify({name:memName,appliance:memAppliance,problem:memProblem,location:memLocation})); }catch(e){} }
 function showMsg(text, who){ var d=document.createElement('div'); d.className='msg '+who; d.innerHTML=text; chatBox.appendChild(d); chatBox.scrollTop=chatBox.scrollHeight; }
-function clearChat(){ try{ localStorage.removeItem('ruaka_mem_simple'); }catch(e){} memName=""; memAppliance=""; memProblem=""; memLocation=""; lastBotAns=""; lastUserQ=""; chatBox.innerHTML=""; showMsg("Hello again! How can I help you today? Tell me what is broken.",'bot'); }
+function clearChat(){ try{ localStorage.removeItem('ruaka_mem_simple'); }catch(e){} memName=""; memAppliance=""; memProblem=""; memLocation=""; chatBox.innerHTML=""; showMsg("Hello again! How can I help you today? Tell me what is broken.",'bot'); }
 function quickBook(dev){ var sel=document.getElementById('device'); if(sel) sel.value=dev; var b=document.getElementById('book'); if(b) b.scrollIntoView({behavior:'smooth'}); }
 function hasWord(text, words){ var low=" "+text.toLowerCase().replace(/[^a-z0-9 ]/g," ")+" "; for(var i=0;i<words.length;i++){ if(low.indexOf(" "+words[i]+" ")!==-1) return true; } return false; }
 function hasPhrase(text, phrase){ return text.toLowerCase().indexOf(phrase)!==-1; }
@@ -193,11 +192,13 @@ function toTech(appliance){
   if(memLocation) msg += " Location: " + memLocation;
   return "<br><br><a href='https://wa.me/254797300175?text=" + encodeURIComponent(msg) + "' style='display:inline-block;background:#25D366;color:#fff;padding:10px 14px;border-radius:8px;font-weight:bold;text-decoration:none'>Chat Technician on Whats App →</a> Or call <b>0797 300 175</b>";
 }
+function cleanName(s){ return s.replace(/\b(is|has|was|were|are|am)\b/gi,'').replace(/\s+/g,' ').trim(); }
 function detectAppliance(q,l){
   if(hasPhrase(l,'car radio')||hasPhrase(l,'car stereo')) return 'Car Radio';
   if(hasPhrase(l,'home theatre')||hasPhrase(l,'home theater')||hasPhrase(l,'sound system')) return 'Home Theatre';
   if(hasWord(l,['computer','laptop','pc','desktop','macbook'])) return 'Computer / Laptop';
   if(hasWord(l,['amplifier','amp','woofer','subwoofer','speaker','bass'])) return 'Woofer / Amplifier';
+  if(hasWord(l,['monitor','screen','display'])) return 'Monitor';
   if(hasWord(l,['tv','television'])) return 'TV';
   if(hasWord(l,['microwave'])) return 'Microwave';
   if(hasWord(l,['fridge','freezer'])) return 'Fridge';
@@ -213,12 +214,14 @@ function detectAppliance(q,l){
   if(hasWord(l,['phone'])) return 'Phone';
   if(hasWord(l,['printer'])) return 'Printer';
   if(hasWord(l,['charger'])) return 'Charger';
-  var m = q.match(/(?:my|the|our)\s+([a-z]+(?:\s+[a-z]+)?)\s+(?:is|has|was|is not|has stopped|not|does|doesnt|doesn't|won't|wont|can't|cant|stopped)/i);
-  if(m){ var cand=m[1].toLowerCase().trim(); var bad=['name','location','phone','problem','question','friend','brother','sister','mother','father','car','house','fridge','tv']; if(bad.indexOf(cand)===-1 && cand.length>2){ return cand.split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' '); } }
+  if(hasWord(l,['aircon','ac'])) return 'Air Conditioner';
+  var m = q.match(/(?:my|the|our)\s+([a-z]+)\s+(?:is|has|was|is not|has stopped|not|does|doesnt|doesn't|won't|wont|can't|cant|stopped)/i);
+  if(m){ var cand=cleanName(m[1].toLowerCase().trim()); var bad=['name','location','phone','problem','question','friend','brother','sister','mother','father','car','house','fridge','tv','is','has']; if(bad.indexOf(cand)===-1 && cand.length>2){ return cand.split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' '); } }
   return "";
 }
 function getInfo(a,l){
   var low=a.toLowerCase();
+  if(low.indexOf('monitor')!==-1) return "<b>Monitor:</b><br><b>Likely cause:</b> No display is often loose cable, faulty HDMI / VGA cable, faulty backlight, or power board. If power light is on but no picture, it is often cable or backlight.<br><b>What to do:</b> Check cable is tight on both sides, try another cable or another socket, try power off for 1 minute.<br><b>Estimate: Ksh 800 - 3,000.</b>";
   if(low.indexOf('car radio')!==-1||low==='radio') return "<b>Car Radio:</b><br><b>Likely cause:</b> No sound is often damaged speaker, faulty wiring, or amplifier IC. No power is often fuse, wiring, or power IC. Distorted sound is often speaker or output IC.<br><b>What to do:</b> Check fuse and wiring, do not keep volume up if distorting.<br><b>Estimate: Ksh 700 - 2,500.</b>";
   if(low.indexOf('home theatre')!==-1) return "<b>Home Theatre:</b><br><b>Likely cause:</b> No sound from some speakers is often wiring, settings, or amplifier channel.<br><b>Estimate: Ksh 800 - 3,000.</b>";
   if(low.indexOf('computer')!==-1) return "<b>Computer / Laptop:</b><br><b>Likely cause:</b> Not switching on is often faulty charger, battery, RAM, or power button. Black screen is often RAM or display. Slow is often full storage or virus.<br><b>What to do:</b> Remove charger, hold power button 15 seconds, try again with charger.<br><b>Estimate: Ksh 800 - 3,500.</b>";
@@ -230,7 +233,7 @@ function getInfo(a,l){
   if(low.indexOf('cooker')!==-1) return "<b>Cooker / Oven:</b><br><b>Likely cause:</b> Burner not lighting is often blocked nozzle or faulty igniter.<br><b>Safety:</b> If you smell gas, turn off gas, open windows, do not switch on lights.<br><b>Estimate: Ksh 1,000 - 3,000.</b>";
   if(low==='decoder') return "<b>Decoder:</b><br><b>Likely cause:</b> No signal is often dish alignment or cable. No power is often power supply.<br><b>Estimate: Ksh 500 - 1,500.</b>";
   var p="";
-  if(l.indexOf('no sound')!==-1||l.indexOf('no audio')!==-1) p="<b>Likely cause:</b> No sound is often damaged speaker, faulty wiring, or audio IC.<br><b>What to do:</b> Check volume, cables and speakers.<br>";
+  if(l.indexOf('no sound')!==-1||l.indexOf('no audio')!==-1||l.indexOf('not displaying')!==-1||l.indexOf('no display')!==-1||l.indexOf('no picture')!==-1) p="<b>Likely cause:</b> No display / no picture is often loose cable, faulty cable, backlight, or power board.<br><b>What to do:</b> Check cable is tight, try another cable and another socket.<br>";
   else if(l.indexOf('not working')!==-1||l.indexOf('not turning')!==-1||l.indexOf('not switching')!==-1||l.indexOf('no power')!==-1||l.indexOf('dead')!==-1) p="<b>Likely cause:</b> No power / not turning on is often faulty power supply, fuse, cable, or power switch.<br><b>What to do:</b> Try a different socket, check cable and fuse.<br>";
   else if(l.indexOf('noise')!==-1||l.indexOf('loud')!==-1||l.indexOf('humming')!==-1||l.indexOf('distort')!==-1) p="<b>Likely cause:</b> Noise or distortion is often worn fan, motor, or damaged speaker.<br><b>What to do:</b> Switch it off, do not keep using it loud.<br>";
   else if(l.indexOf('not cooling')!==-1||l.indexOf('not cold')!==-1) p="<b>Likely cause:</b> Not cooling is often low gas, blocked fan, or faulty thermostat.<br>";
@@ -240,63 +243,65 @@ function getInfo(a,l){
   else p="<b>Likely cause:</b> This needs a physical check. Technician will test it and tell you exact fault and price before starting.<br>";
   return "<b>"+a+":</b><br>"+p+"<b>Estimate: Ksh 500 - 2,500.</b> Yes, we repair it.";
 }
-function sendBot(ans){
-  if(ans === lastBotAns){
-    ans = "I already told you that above"+(memName? ", "+memName:"")+" - I won't repeat it. Let's move forward: do you want to book the repair, or talk to the technician directly?"+toTech(memAppliance);
-  }
-  lastBotAns = ans;
-  showMsg(ans,'bot');
+function goBook(current){
+  var bk="Perfect"+(memName? ", "+memName:"")+", let's book it.";
+  if(current) bk+=" Appliance: "+current+".";
+  if(memName) bk+=" Name: "+memName+"."; else bk+=" What is your name?";
+  if(memLocation) bk+=" Location: "+memLocation+"."; else bk+=" Where are you located?";
+  bk+=" Fill the Book a Repair form below and press Send to Whats App.";
+  showMsg(bk,'bot');
+  if(memName) document.getElementById('name').value=memName; if(memLocation) document.getElementById('loc').value=memLocation; if(memProblem) document.getElementById('problem').value=memProblem;
+  document.getElementById('book').scrollIntoView({behavior:'smooth'});
 }
 function ask(){
   var input=document.getElementById('q'); var q=input.value.trim(); if(!q){ input.focus(); return; }
   showMsg(q,'me'); input.value='';
   var l=q.toLowerCase(); var ans="";
-  if(l === lastUserQ && memAppliance){
-    sendBot("You just asked that. I already answered above - let's move forward. Do you want to book your "+memAppliance+"?"+toTech(memAppliance)); return;
+  if(hasPhrase(l,'you are rude')||hasPhrase(l,'why are you rude')||hasPhrase(l,'why are you so rude')||hasPhrase(l,'you are stupid')||hasPhrase(l,'you are dumb')||hasPhrase(l,'you are very stupid')||hasPhrase(l,'stupid')||hasPhrase(l,'dumb')||hasPhrase(l,'useless')||hasPhrase(l,'you are annoying')||hasPhrase(l,'annoying')||hasPhrase(l,'shut up')){
+    showMsg("I'm really sorry about that"+(memName? ", "+memName:"")+". I didn't mean to sound rude at all. Thank you for telling me. Let's start fresh - how can I help you properly now? Do you want to book your "+(memAppliance||"repair")+", or talk directly to the technician?"+toTech(memAppliance),'bot'); return;
   }
-  lastUserQ = l;
+  if(hasPhrase(l,'sorry')||hasPhrase(l,'pole')){
+    showMsg("No problem at all"+(memName? ", "+memName:"")+". No worries, we're good. How can I help you now?"+toTech(memAppliance),'bot'); return;
+  }
+  if(hasPhrase(l,'i want to book')||hasPhrase(l,'yes i want')||hasPhrase(l,'i want book')||hasPhrase(l,'book it')||hasPhrase(l,'book for me')||hasPhrase(l,'yes book')||hasPhrase(l,'please book')){
+    goBook(memAppliance||detectAppliance(q,l)); return;
+  }
+  if(hasPhrase(l,'already told')||hasPhrase(l,'already said')||hasPhrase(l,'i told you')||hasPhrase(l,'i have told')||hasPhrase(l,'as i said')||hasPhrase(l,'you already know')||hasPhrase(l,'stop repeating')||hasPhrase(l,'you keep repeating')||hasPhrase(l,'dont repeat')||hasPhrase(l,"don't repeat")){
+    var sum="You're right, sorry about that";
+    if(memName) sum+=", "+memName;
+    sum+=". You told me ";
+    if(memAppliance && memProblem) sum+="your "+memAppliance+" - "+memProblem+". ";
+    else if(memAppliance) sum+="about your "+memAppliance+". ";
+    else sum+="about your appliance. ";
+    sum+="Let's move forward nicely. Do you want to book it now?";
+    if(!memLocation) sum+=" Tell me your location and I will arrange it.";
+    else sum+=" I have your location as "+memLocation+".";
+    showMsg(sum+toTech(memAppliance),'bot'); return;
+  }
   var nm=q.match(/^(?:my name is|i am|i'm|im|call me|i am called)\s+([a-zA-Z]+)/i);
-  if(nm){ var nn=nm[1].charAt(0).toUpperCase()+nm[1].slice(1).toLowerCase(); if(nn.length>1){ memName=nn; saveMem(); sendBot("Nice to meet you, "+memName+"! What is broken?"); return; } }
+  if(nm){ var nn=nm[1].charAt(0).toUpperCase()+nm[1].slice(1).toLowerCase(); if(nn.length>1){ memName=nn; saveMem(); showMsg("Nice to meet you, "+memName+"! What is broken?",'bot'); return; } }
   if(hasPhrase(l,'i live in')||hasPhrase(l,'i stay in')||hasPhrase(l,'my location is')||hasPhrase(l,'i am from')){
-    var loc=q.replace(/.*(live in|stay in|my location is|i am from)/i,'').trim(); if(loc){ memLocation=loc; saveMem(); sendBot("Got it"+(memName? ", "+memName:"")+". We do home visits in "+loc+" and many other areas. What is broken?"); return; }
+    var loc=q.replace(/.*(live in|stay in|my location is|i am from)/i,'').trim(); if(loc){ memLocation=loc; saveMem(); showMsg("Got it"+(memName? ", "+memName:"")+". We do home visits in "+loc+" and many other areas. What is broken?",'bot'); return; }
   }
-  if(hasPhrase(l,'what is my name')){ sendBot(memName? "Your name is "+memName+"." : "You have not told me your name yet. What is your name?"); return; }
-  if(hasPhrase(l,'who are you')||hasPhrase(l,'what are you')){ sendBot("I am the Ruaka Electronics assistant. I help you understand what is wrong with your appliance, how much it may cost, and how to book a repair. What is broken?"); return; }
-  if(hasPhrase(l,'already told')||hasPhrase(l,'already said')||hasPhrase(l,'i told you')||hasPhrase(l,'i have told')||hasPhrase(l,'as i said')||hasPhrase(l,'you already know')||hasPhrase(l,'i said already')||hasPhrase(l,'stop repeating')||hasPhrase(l,'you keep repeating')||hasPhrase(l,'dont repeat')||hasPhrase(l,"don't repeat")){
-    var sum = "You're right, sorry about that";
-    if(memName) sum += ", "+memName;
-    sum += ". You told me ";
-    if(memAppliance && memProblem) sum += "your "+memAppliance+" - "+memProblem+". ";
-    else if(memAppliance) sum += "about your "+memAppliance+". ";
-    else sum += "about your appliance. ";
-    sum += "I won't repeat it. Do you want to book the repair now?";
-    if(!memLocation) sum += " Tell me your location and I will arrange it.";
-    else sum += " I have your location as "+memLocation+".";
-    sum += " Or fill the Book a Repair form below.";
-    sendBot(sum + toTech(memAppliance));
-    if(memName) document.getElementById('name').value=memName; if(memLocation) document.getElementById('loc').value=memLocation; if(memProblem) document.getElementById('problem').value=memProblem;
-    document.getElementById('book').scrollIntoView({behavior:'smooth'}); return;
-  }
-  if(l==='yes'||l==='yeah'||l==='yep'||l==='yea'||l==='ndio'||l==='sawa'||l==='ok'||l==='okay'){
-    if(memAppliance){
-      sendBot("Perfect"+(memName? ", "+memName:"")+". Let's book your "+memAppliance+"."+(memLocation? " Location: "+memLocation+"." : " Where are you located?")+" Fill the Book a Repair form below and press Send to Whats App."+toTech(memAppliance));
-      if(memName) document.getElementById('name').value=memName; if(memLocation) document.getElementById('loc').value=memLocation; if(memProblem) document.getElementById('problem').value=memProblem;
-      document.getElementById('book').scrollIntoView({behavior:'smooth'}); return;
-    }
+  if(hasPhrase(l,'what is my name')){ showMsg(memName? "Your name is "+memName+"." : "You have not told me your name yet. What is your name?",'bot'); return; }
+  if(hasPhrase(l,'who are you')||hasPhrase(l,'what are you')){ showMsg("I am the Ruaka Electronics assistant. I help you understand what is wrong with your appliance, how much it may cost, and how to book a repair. What is broken?",'bot'); return; }
+  if(l==='yes'||l==='yeah'||l==='yep'||l==='yea'||l==='ndio'){
+    if(memAppliance){ goBook(memAppliance); return; }
+    showMsg("Yes? Tell me what you want to do - book, price, or talk to technician?"+toTech(memAppliance),'bot'); return;
   }
   if(l==='no'||l==='nope'||l==='hapana'){
-    sendBot("No problem"+(memName? ", "+memName:"")+". What would you like instead? Price, location, or chat directly with technician?"+toTech(memAppliance)); return;
+    showMsg("No problem at all"+(memName? ", "+memName:"")+". What would you like instead? Price, location, or chat directly with technician?"+toTech(memAppliance),'bot'); return;
   }
   var found=detectAppliance(q,l);
   if(found && !hasPhrase(l,'what do you') && !hasPhrase(l,'how much') && !hasPhrase(l,'how long') && !hasPhrase(l,'where') && !hasPhrase(l,'book')){ memAppliance=found; memProblem=q; saveMem(); var s2=document.getElementById('device'); if(s2){ var opts=[]; for(var oi=0;oi<s2.options.length;oi++) opts.push(s2.options[oi].value); if(opts.indexOf(found)!==-1) s2.value=found; } }
   var current=found||memAppliance;
   if(hasPhrase(l,'what do you do')||hasPhrase(l,'what do you repair')||hasPhrase(l,'what can you')){
-    if(found && hasPhrase(l,'do you repair')){ sendBot("Yes, we repair "+found+". "+getInfo(found,l)+"<br><br>Do you want to book it?"+toTech(found)); return; }
-    ans="We repair Fridges, TVs, Woofers, Amplifiers, Microwaves, Computers, Washing Machines, Cookers, Car Radios, Home Theatres, Decoders, Blenders, Irons, Fans, Kettles and almost all home electronics. We are at Old Ruaka Road, Ruaka. Home service in Ruaka, Banana, Ndenderu, Two Rivers, Kiambu Road, Gachie, Westlands, Kangemi, Kinoo, Kikuyu and many others. What is broken?";
+    if(found && hasPhrase(l,'do you repair')){ showMsg("Yes, we repair "+found+". "+getInfo(found,l)+"<br><br>Do you want to book it?"+toTech(found),'bot'); return; }
+    ans="We repair Fridges, TVs, Woofers, Amplifiers, Microwaves, Computers, Washing Machines, Cookers, Car Radios, Home Theatres, Decoders, Blenders, Irons, Fans, Kettles, Monitors and almost all home electronics. We are at Old Ruaka Road, Ruaka. Home service in Ruaka, Banana, Ndenderu, Two Rivers, Kiambu Road, Gachie, Westlands, Kangemi, Kinoo, Kikuyu and many others. What is broken?";
   }
   else if(hasPhrase(l,'how much')||hasWord(l,['price','cost','charge','fee'])){
     if(current){ ans="For your "+current+":<br>"+getInfo(current,l)+"<br><br>This is an estimate only. Technician will confirm final price after checking it at Old Ruaka Road or at your home, before starting."+toTech(current); }
-    else { ans="Tell me which appliance it is, for example: My car radio is not working. Then I will give you the price. Starting prices: Fridge from 1,500, TV from 1,200, Woofer from 800, Microwave from 1,000, Computer from 800, Car Radio from 700, Small appliances from 500."+toTech(""); }
+    else { ans="Tell me which appliance it is, for example: My car radio is not working. Then I will give you the price. Starting prices: Fridge from 1,500, TV from 1,200, Woofer from 800, Microwave from 1,000, Computer from 800, Car Radio from 700, Monitor from 800, Small appliances from 500."+toTech(""); }
   }
   else if(hasPhrase(l,'how long')||hasWord(l,['duration'])||hasPhrase(l,'take long')){
     ans="Most repairs take 1 to 2 hours at your home if the part is available"+(current? " for your "+current:"")+". If we need to order a part, it can take 1 to 2 days. Technician will tell you after checking."+toTech(current);
@@ -308,7 +313,7 @@ function ask(){
     ans="We are open daily from 8am to 8pm at Old Ruaka Road. Whats App us on 0797 300 175 for same-day visit if technician is available."+toTech(current);
   }
   else if(hasWord(l,['home','visit','come'])){
-    ans="Yes, we do home service. You do not need to bring heavy appliances."+(memLocation? " We can come to "+memLocation+"." : " Tell me your location and we will arrange.")+" For small items like car radio, you can also bring it to Old Ruaka Road."+toTech(current);
+    ans="Yes, we do home service. You do not need to bring heavy appliances."+(memLocation? " We can come to "+memLocation+"." : " Tell me your location and we will arrange.")+" For small items like monitor, you can also bring it to Old Ruaka Road."+toTech(current);
   }
   else if(hasWord(l,['payment','pay','mpesa','cash'])){
     ans="You can pay with M-Pesa or cash after repair is done and tested. You only pay the price confirmed before repair starts.";
@@ -323,10 +328,7 @@ function ask(){
     ans="We stand behind our work. If the same problem comes back soon after repair, contact us on 0797 300 175 and we will check it."+toTech(current);
   }
   else if(hasPhrase(l,'book')||hasPhrase(l,'need repair')||hasPhrase(l,'want repair')||hasPhrase(l,'fix it')){
-    var bk="Great! Let's book it."; if(current) bk+=" Appliance: "+current+"."; if(memName) bk+=" Name: "+memName+"."; else bk+=" What is your name?"; if(memLocation) bk+=" Location: "+memLocation+"."; else bk+=" Where are you located?"; bk+=" Fill the Book a Repair form below and press Send to Whats App.";
-    sendBot(bk);
-    if(memName) document.getElementById('name').value=memName; if(memLocation) document.getElementById('loc').value=memLocation; if(memProblem) document.getElementById('problem').value=memProblem;
-    document.getElementById('book').scrollIntoView({behavior:'smooth'}); return;
+    goBook(current); return;
   }
   else if(hasWord(l,['hello','hi','hey','hallo','morning','afternoon','evening'])){
     ans="Hello"+(memName? " "+memName:"")+"! How can I help you today? Tell me what is broken and what it is doing. We are at Old Ruaka Road.";
@@ -346,7 +348,7 @@ function ask(){
   else {
     ans="Yes, we can help with that. For an accurate answer, it is best the technician sees it. Please send him a photo or video and he will tell you the exact fault and price."+toTech("");
   }
-  sendBot(ans);
+  showMsg(ans,'bot');
 }
 var qInput=document.getElementById('q');
 if(qInput){ qInput.addEventListener('keypress',function(e){ if(e.key==='Enter'){ e.preventDefault(); ask(); } }); }
@@ -387,4 +389,4 @@ function postComment(){
 loadComments();
 </script>
 </body>
-                                  </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           </html>
